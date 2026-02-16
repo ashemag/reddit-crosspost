@@ -67,6 +67,7 @@ This is the most important section. Reddit users instantly detect and downvote "
 - No marketing language: avoid "game-changing," "revolutionary," "here's why," "you need to know"
 
 **Body rules:**
+- **Keep it short.** 2-4 sentences is ideal. Reddit rewards punchy posts, not essays. If you can say it in 2 lines, don't use 5.
 - Write like a Reddit user, not a marketer. Short paragraphs. Casual tone.
 - Start with a personal observation or opinion, not a pitch
 - Don't over-explain. Reddit users are smart — imply, don't spell out
@@ -76,6 +77,7 @@ This is the most important section. Reddit users instantly detect and downvote "
 - NO "Let me know what you think!" or "What are your thoughts?" at the end (cliché)
 - Vary sentence length. Mix short punchy lines with longer ones.
 - Match the specific subreddit's vibe — r/founder is different from r/marketing
+- **Cut ruthlessly.** If a sentence doesn't add value, delete it. The best Reddit posts feel effortless, not thorough.
 
 **Examples of BAD (sounds like AI):**
 > "Building products has changed more in the last month than in the last decade. Everyone is more focused on distribution than ever. Here's a great conversation about the 2026 tech media strategy. Originally shared on X: [link]"
