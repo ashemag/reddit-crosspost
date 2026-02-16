@@ -71,6 +71,3 @@ After a crosspost run, you get a summary like:
 ⏭️ r/startups — skipped, requires specific title prefix + strict posting rules
 ```
 
-## License
-
-MIT
