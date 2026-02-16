@@ -1,61 +1,86 @@
 # reddit-crosspost
 
-An OpenClaw skill that crosspost your X/Twitter posts to Reddit — finding relevant subreddits, adapting content for each community, and posting via browser automation.
+> OpenClaw skill that crossposts your X/Twitter posts to relevant subreddits — with human-speed pacing, content variation, and anti-detection built in.
 
-## What it does
+Give your agent an X post URL. It finds the right subreddits, rewrites your content for each community, gets your approval, and posts via browser automation — all while looking like a real person, not a bot.
 
-Give it an X post URL and it will:
+## How it works
 
-1. Read the tweet content via browser
-2. Find relevant subreddits (searching Reddit + checking your subscriptions)
-3. Present recommendations with draft posts tailored to each sub
-4. Wait for your approval before posting anything
-5. Post via browser automation with human-speed pacing
-6. Verify posts landed (checks for spam filter removals)
-7. Report back with links to all successful posts
+```
+You: "crosspost this to reddit: https://x.com/username/status/123456789"
+
+Agent: reads tweet via browser
+     → searches Reddit for relevant communities  
+     → checks your subscriptions + karma
+     → presents 5-7 subreddit recommendations with draft posts
+     → waits for your approval
+
+You: "post to all of them"
+
+Agent: posts to each sub with 3-5 min random gaps
+     → types slowly, browses between posts
+     → verifies each post wasn't spam-filtered
+     → reports back with links
+```
+
+## Features
+
+| Feature | What it does |
+|---------|-------------|
+| **Human-speed pacing** | Slow typing, random delays (3-5 min), natural browsing between posts |
+| **Content variation** | Every post rewritten per subreddit — different angle, title, length. 40%+ word difference enforced |
+| **Anti-AI writing** | Lowercase titles, casual tone, deliberate imperfections. Passes Reddit's AI detection |
+| **Subreddit awareness** | Checks karma reqs, flair rules, title formats, anti-promo policies before posting |
+| **Post verification** | Confirms posts appear in /new — catches silent spam filter removals |
+| **Browser resilience** | Handles timeouts/crashes gracefully, prevents double-posting |
+| **Time-of-day awareness** | Warns if posting during dead hours, suggests peak times |
+| **Engagement follow-up** | Reminds you to reply to early comments so posts don't look like drive-by spam |
 
 ## Why browser automation?
 
-Reddit's API requires app registration and has strict rate limits. Browser automation lets your agent post as *you* — same session, same account, no API keys. The skill includes detailed pacing rules so your account doesn't get flagged.
-
-## Key features
-
-- **Human-speed pacing** — Slow typing, random delays between posts, natural browsing patterns between submissions
-- **Content variation** — Every post is meaningfully rewritten per subreddit (different angle, title structure, length). No cookie-cutter spam.
-- **Subreddit rules awareness** — Checks for karma requirements, flair, title formats, and anti-promo rules before posting
-- **Sound human, not like AI** — Detailed writing guide to avoid "AI slop" detection. Lowercase titles, casual tone, imperfect grammar on purpose.
-- **Post verification** — Confirms each post actually appears in /new and wasn't silently spam-filtered
-- **Browser resilience** — Handles timeouts and crashes gracefully, avoids double-posting
-- **Time-of-day awareness** — Suggests better posting times if you're about to post at 3am
-- **Engagement reminders** — Prompts you to reply to early comments so posts don't look like drive-by spam
+Reddit's API requires app registration and has strict rate limits. Browser automation lets your agent post as *you* — same session, same account, no API keys needed. The skill includes detailed pacing rules so your account doesn't get flagged.
 
 ## Install
 
-Copy `SKILL.md` to your OpenClaw workspace skills directory:
+Copy `SKILL.md` into your OpenClaw skills directory:
 
-```
-~/.openclaw/workspace/skills/reddit-crosspost/SKILL.md
-```
-
-Or install the packaged skill:
-
-```
-openclaw skill install reddit-crosspost.skill
+```bash
+mkdir -p ~/.openclaw/workspace/skills/reddit-crosspost
+curl -o ~/.openclaw/workspace/skills/reddit-crosspost/SKILL.md \
+  https://raw.githubusercontent.com/ashemag/reddit-crosspost/main/SKILL.md
 ```
 
 ## Prerequisites
 
-- OpenClaw with browser automation enabled (`openclaw` browser profile)
-- Logged into Reddit in the browser
-- Logged into X/Twitter in the browser (for reading tweet content)
+- [OpenClaw](https://github.com/openclaw/openclaw) with browser automation enabled
+- Logged into **Reddit** in the openclaw browser profile
+- Logged into **X/Twitter** in the openclaw browser profile (for reading tweet content)
 
-## Usage
+## Example output
 
-Just share an X post URL with your agent:
+After a crosspost run, you get a summary like:
 
-> "crosspost this to reddit: https://x.com/username/status/123456789"
+```
+✅ r/founder — "distribution > building right now and i don't think it's close"
+   https://reddit.com/r/founder/comments/abc123
 
-The agent will handle the rest — finding subs, drafting posts, and waiting for your go-ahead before posting.
+✅ r/micro_saas — "anyone else spending more time on distribution than building?"
+   https://reddit.com/r/micro_saas/comments/def456
+
+❌ r/Entrepreneur — requires 10 comment karma in sub (you have 0)
+
+⏭️ r/startups — skipped, requires "i will not promote" prefix + strict AI rules
+```
+
+## Writing style
+
+The skill includes a detailed writing guide to avoid "AI slop" detection on Reddit:
+
+**Bad** (sounds like AI):
+> "Building products has changed more in the last month than in the last decade. Everyone is more focused on distribution than ever. Here's a great conversation about the 2026 tech media strategy."
+
+**Good** (sounds human):
+> "anyone else feel like the distribution conversation has completely taken over? like six months ago everyone was heads down shipping, now it's all about how you get seen. caught this pod ep that actually had decent takes on what's working rn https://x.com/..."
 
 ## License
 
